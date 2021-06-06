@@ -8,10 +8,13 @@ doc_gen:
 unit_test:
 	rm -rf ebin/* src/*.beam *.beam test_src/*.beam test_ebin;
 	rm -rf  *~ */*~  erl_cra*;
-	rm -rf catalog etcd controller support;
+	rm -rf controller_*;
 	rm -rf *_specs *_config *.log;
-#	test application
+#	support
 	mkdir test_ebin;
+	cp ../support/src/support.app test_ebin;
+	erlc -o test_ebin ../support/src/*.erl;
+#	test application
 	cp test_src/*.app test_ebin;
 	erlc -o test_ebin test_src/*.erl;
 	erl -pa ebin -pa test_ebin\
